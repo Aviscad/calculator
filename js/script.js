@@ -2,45 +2,106 @@ let equal = document.querySelector(".equal"),
   dot = document.querySelector(".dot"),
   clear = document.querySelector(".clear"),
   buttons = document.querySelectorAll(".btn"),
-  number1 = 0,
-  number2 = 0,
-  operator = "";
+  result = document.querySelector("#result"),
+  number1 = "",
+  number2 = "",
+  operator = "",
+  total = 0;
 
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
     let buttonValue = parseInt(e.target.innerText);
     if (buttonValue >= 0 && buttonValue <= 9) {
-      if (number1 == 0) {
-        number1 = buttonValue;
-      } else {
-        number2 = buttonValue;
+      if (operator == "") {
+        number1 += buttonValue;
+      } else if (number1 != "" && operator != "") {
+        number2 += buttonValue;
       }
-      console.log(number1 + "..." + number2);
+
+      result.innerText == "0"
+        ? (result.innerText = buttonValue)
+        : (result.innerText += buttonValue);
     } else if (e.target.innerText == "+") {
-      console.log("+");
+      if (number1 != "" && number2 != "" && operator != "") {
+        total = operation(number1, number2, operator);
+        number1 = total;
+        number2 = "";
+        operator = e.target.innerText;
+        result.innerText = total + " " + operator + " ";
+      } else if (result.innerText != "0") {
+        operator = e.target.innerText;
+        result.innerText += operator;
+      }
     } else if (e.target.innerText == "-") {
-      console.log("-");
+      if (number1 != 0 && number2 != 0 && operator != "") {
+        total = operation(number1, number2, operator);
+        number1 = total;
+        number2 = "";
+        operator = e.target.innerText;
+        result.innerText = total + " " + operator + " ";
+      } else if (result.innerText != "0") {
+        operator = e.target.innerText;
+        result.innerText += operator;
+      }
     } else if (e.target.innerText == "*") {
-      console.log("*");
+      if (number1 != 0 && number2 != 0 && operator != "") {
+        total = operation(number1, number2, operator);
+        number1 = total;
+        number2 = "";
+        operator = e.target.innerText;
+        result.innerText = total + " " + operator + " ";
+      } else if (result.innerText != "0") {
+        operator = e.target.innerText;
+        result.innerText += operator;
+      }
     } else if (e.target.innerText == "/") {
-      console.log("/");
+      if (number1 != 0 && number2 != 0 && operator != "") {
+        total = operation(number1, number2, operator);
+        number1 = total;
+        number2 = "";
+        operator = e.target.innerText;
+        result.innerText = total + " " + operator + " ";
+      } else if (result.innerText != "0") {
+        operator = e.target.innerText;
+        result.innerText += operator;
+      }
     } else if (e.target.innerText == "=") {
-      console.log("=");
+      if (number1 != "" && number2 != "" && operator != "") {
+        result.innerText = operation(number1, number2, operator);
+      }
     } else if (e.target.innerText == "C") {
-      console.log(e.target.innerText);
+      number1 = number2 = operator = "";
+      total = 0;
+      result.innerText = 0;
     }
   });
 });
 
+function operation(n1, n2, simbol) {
+  switch (simbol) {
+    case "+":
+      return add(n1, n2);
+      break;
+    case "-":
+      return sub(n1, n2);
+      break;
+    case "*":
+      return mul(n1, n2);
+      break;
+    case "/":
+      return div(n1, n2);
+      break;
+  }
+}
 function add(n1, n2) {
-  return n1 + n2;
+  return parseInt(n1) + parseInt(n2);
 }
 function sub(n1, n2) {
-  return n1 - n2;
+  return parseInt(n1) - parseInt(n2);
 }
 function mul(n1, n2) {
-  return n1 * n2;
+  return parseInt(n1) * parseInt(n2);
 }
 function div(n1, n2) {
-  return n1 / n2;
+  return parseInt(n1) / parseInt(n2);
 }
