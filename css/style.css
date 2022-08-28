@@ -1,3 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+html{
+    font-size: 16px;
+    box-sizing: inherit;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    text-align: center;
+    padding-top: 3rem;
+}
+footer{
+    margin-top: 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    font-size: .95em;
+    text-align: center;
+}
+
 .container{
     display: flex;
     align-items: center;
@@ -13,10 +41,11 @@
     box-shadow: 5px 5px 5px rgb(100, 100, 100);
     border-radius: 0 0 5px 5px;
     padding: 10px;
+    padding-top: 15px;
 }
 .screen{
     width: 260px;
-    padding:0px 15px;
+    padding:10px 15px 0px 15px;
     font-size: 16px;
     text-align: right;
     color: #fff;
@@ -25,10 +54,11 @@
     border-radius: 5px 5px 0 0;
 }
 .screen p {
-    background-color: green;
+    margin: 0;
+    background-color: rgb(53, 200, 53);
+    color: #000;
     padding: 10px;
     font-weight: bold;
-    border-radius: 5px;
 }
 .btn{
     min-width: 50px;
@@ -37,15 +67,27 @@
     background-color: #fff;
     font-size: 16px;
     border-radius: 5px;
+    cursor: pointer;
 }
 .btn:hover{
-   background-color: antiquewhite;
+   background-color: rgb(214, 214, 214);
 }
 .zero{
     grid-area: 4/1/4/3;
 }
 .clear{
     grid-area: 1/4/1/5;
+    background-color: red;
+    color: #fff;
+    font-weight: bold;
+}
+.del{
+    background-color: red;
+    color: #fff;
+    font-weight: bold;
+}
+.clear:hover, .del:hover{
+    background-color: rgba(255, 0, 0, 0.795);
 }
 .equal{
     grid-area: 4/4/4/6;

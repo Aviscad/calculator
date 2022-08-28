@@ -1,6 +1,7 @@
 let equal = document.querySelector(".equal"),
   dot = document.querySelector(".dot"),
   del = document.querySelector(".del"),
+  history = document.querySelector("#history"),
   clear = document.querySelector(".clear"),
   buttons = document.querySelectorAll(".btn"),
   result = document.querySelector("#result"),
@@ -11,10 +12,7 @@ let equal = document.querySelector(".equal"),
 
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    let buttonValue =
-      e.target.innerText == "."
-        ? e.target.innerText
-        : parseInt(e.target.innerText);
+    let buttonValue = e.target.innerText;
     if (buttonValue >= 0 && buttonValue <= 9) {
       if (operator == "") {
         number1 += buttonValue;
@@ -30,8 +28,9 @@ buttons.forEach((button) => {
         number1 = total;
         number2 = "";
         operator = e.target.innerText;
-        result.innerText = total + " " + operator + " ";
-      } else if (result.innerText != "0") {
+        history.innerText = "= " + total + " " + " + ";
+        result.innerText = "0.00";
+      } else if (result.innerText != "0.00") {
         operator = e.target.innerText;
         result.innerText += operator;
       }
@@ -41,8 +40,9 @@ buttons.forEach((button) => {
         number1 = total;
         number2 = "";
         operator = e.target.innerText;
-        result.innerText = total + " " + operator + " ";
-      } else if (result.innerText != "0") {
+        history.innerText = "= " + total + " " + " - ";
+        result.innerText = "0.00";
+      } else if (result.innerText != "0.00") {
         operator = e.target.innerText;
         result.innerText += operator;
       }
@@ -52,8 +52,9 @@ buttons.forEach((button) => {
         number1 = total;
         number2 = "";
         operator = e.target.innerText;
-        result.innerText = total + " " + operator + " ";
-      } else if (result.innerText != "0") {
+        history.innerText = "= " + total + " " + " * ";
+        result.innerText = "0.00";
+      } else if (result.innerText != "0.00") {
         operator = e.target.innerText;
         result.innerText += operator;
       }
@@ -63,16 +64,18 @@ buttons.forEach((button) => {
         number1 = total;
         number2 = "";
         operator = e.target.innerText;
-        result.innerText = total + " " + operator + " ";
-      } else if (result.innerText != "0") {
+        history.innerText = "= " + total + " " + " / ";
+        result.innerText = "0.00";
+      } else if (result.innerText != "0.00") {
         operator = e.target.innerText;
         result.innerText += operator;
       }
     } else if (e.target.innerText == "=") {
       if (number1 != "" && number2 != "" && operator != "") {
-        result.innerText = operation(number1, number2, operator);
+        history.innerText = "= " + operation(number1, number2, operator);
+        result.innerText = "0.00";
       }
-    } else if (e.target.innerText == "C") {
+    } else if (e.target.innerText == "CA") {
       reset();
     } else if (e.target.innerText == ".") {
       if (operator == "") {
@@ -88,7 +91,7 @@ buttons.forEach((button) => {
           result.innerText += number2;
         }
       }
-    } else if (e.target.innerText == "Del") {
+    } else if (e.target.innerText == "CE") {
       if (operator == "") {
         number1 = number1.substring(0, number1.length - 1);
         if (number1 == "") {
@@ -112,7 +115,7 @@ buttons.forEach((button) => {
 function reset() {
   number1 = number2 = operator = "";
   total = 0;
-  result.innerText = "0.00";
+  result.innerText = history.innerText = "0.00";
 }
 function operation(n1, n2, simbol) {
   switch (simbol) {
