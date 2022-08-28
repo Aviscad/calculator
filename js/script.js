@@ -10,6 +10,42 @@ let equal = document.querySelector(".equal"),
   operator = "",
   total = 0;
 
+function reset() {
+  number1 = number2 = operator = "";
+  total = 0;
+  result.innerText = history.innerText = "0.00";
+}
+
+function operation(n1, n2, simbol) {
+  switch (simbol) {
+    case "+":
+      return add(n1, n2).toFixed(2);
+      break;
+    case "-":
+      return sub(n1, n2).toFixed(2);
+      break;
+    case "*":
+      return mul(n1, n2).toFixed(2);
+      break;
+    case "/":
+      return n2 == 0 ? "Error" : div(n1, n2).toFixed(2);
+      break;
+  }
+}
+
+function add(n1, n2) {
+  return parseFloat(n1) + parseFloat(n2);
+}
+function sub(n1, n2) {
+  return parseFloat(n1) - parseFloat(n2);
+}
+function mul(n1, n2) {
+  return parseFloat(n1) * parseFloat(n2);
+}
+function div(n1, n2) {
+  return parseFloat(n1) / parseFloat(n2);
+}
+
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
     let buttonValue = e.target.innerText;
@@ -35,7 +71,7 @@ buttons.forEach((button) => {
         result.innerText += operator;
       }
     } else if (e.target.innerText == "-") {
-      if (number1 != 0 && number2 != 0 && operator != "") {
+      if (number1 != "" && number2 != "" && operator != "") {
         total = operation(number1, number2, operator);
         number1 = total;
         number2 = "";
@@ -47,7 +83,7 @@ buttons.forEach((button) => {
         result.innerText += operator;
       }
     } else if (e.target.innerText == "*") {
-      if (number1 != 0 && number2 != 0 && operator != "") {
+      if (number1 != "" && number2 != "" && operator != "") {
         total = operation(number1, number2, operator);
         number1 = total;
         number2 = "";
@@ -59,7 +95,7 @@ buttons.forEach((button) => {
         result.innerText += operator;
       }
     } else if (e.target.innerText == "/") {
-      if (number1 != 0 && number2 != 0 && operator != "") {
+      if (number1 != "" && number2 != "" && operator != "") {
         total = operation(number1, number2, operator);
         number1 = total;
         number2 = "";
@@ -112,36 +148,3 @@ buttons.forEach((button) => {
     }
   });
 });
-function reset() {
-  number1 = number2 = operator = "";
-  total = 0;
-  result.innerText = history.innerText = "0.00";
-}
-function operation(n1, n2, simbol) {
-  switch (simbol) {
-    case "+":
-      return add(n1, n2).toFixed(2);
-      break;
-    case "-":
-      return sub(n1, n2).toFixed(2);
-      break;
-    case "*":
-      return mul(n1, n2).toFixed(2);
-      break;
-    case "/":
-      return n2 == 0 ? "Error" : div(n1, n2).toFixed(2);
-      break;
-  }
-}
-function add(n1, n2) {
-  return parseFloat(n1) + parseFloat(n2);
-}
-function sub(n1, n2) {
-  return parseFloat(n1) - parseFloat(n2);
-}
-function mul(n1, n2) {
-  return parseFloat(n1) * parseFloat(n2);
-}
-function div(n1, n2) {
-  return parseFloat(n1) / parseFloat(n2);
-}
